@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Account;
+import model.exceptions.Exceptions;
 
 public class Program {
 
@@ -28,16 +29,19 @@ public class Program {
 		double dAmount = sc.nextDouble();
 		acc.deposit(dAmount);
 		
-		System.out.print("New balance: " + acc.getBalance());
+		System.out.printf("New Balance: %.2f%n", acc.getBalance());
 		
 		System.out.print("\nEnter amount for withdraw: ");
 		double wAmount = sc.nextDouble();
-		acc.withdraw(wAmount);
 		
-		System.out.print("New balance: " + acc.getBalance());
+		try {
+			acc.withdraw(wAmount);
+			System.out.printf("New Balance: %.2f%n", acc.getBalance());
+		} catch (Exceptions e){
+			System.out.println(e.getMessage());
+		}
 		
-		
-		
+		sc.close();
 	}
 
 }
